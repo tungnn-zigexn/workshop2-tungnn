@@ -96,7 +96,7 @@ pipeline {
 
                                 # Cập nhật liên kết 'current' và xóa các bản phát hành cũ hơn
                                 ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} -p ${REMOTE_PORT} "
-                                    cd ${REMOTE_PATH}/${WORKSPACE_NAME}/deploy
+                                    cd ${REMOTE_PATH}/${PRIVATE_FOLDER}/deploy
                                     rm -f current
                                     ln -s ${RELEASE_DATE} current
                                     ls -1t | grep -E '^[0-9]{8}\$' | tail -n +6 | xargs -r rm -rf
