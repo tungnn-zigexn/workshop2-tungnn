@@ -67,7 +67,7 @@ pipeline {
                                 cd ${LOCAL_PATH}/${PRIVATE_FOLDER}/deploy
                                 rm -f current
                                 ln -s ${releaseDate} current
-                                ls -1t | grep -E '^[0-9]{8}\$' | tail -n +6 | xargs -r rm -rf
+                                ls -1tr | head -n -6 | xargs rm -rf --
                             "
                         """
                     }
