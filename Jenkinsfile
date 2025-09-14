@@ -113,4 +113,48 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            echo "****DEPLOY DONE****"
+            def releaseDate = sh(script: 'date +%Y%m%d%H%M%S', returnStdout: true).trim()
+
+            def envMessage = ""
+            if (params.DEPLOY_ENV == 'local') {
+                envMessage = "• *Local Container:* Files deployed to ${LOCAL_CONTAINER}:${LOCAL_PATH}/${PRIVATE_FOLDER}/deploy/current/"
+            } else if (params.DEPLOY_ENV == 'firebase') {
+                envMessage = "• *Firebase:* https://tungnn-workshop2.web.app"
+            } else if (params.DEPLOY_ENV == 'remote') {
+                envMessage = "• *Remote:* http://${REMOTE_HOST}/jenkins/${PRIVATE_FOLDER}/deploy/current/"
+            }
+            slackSend(
+                channel: '#lnd-2025-workshop',
+                color: 'good',
+                message: ":white_check_mark: *SUCCESS* - Workshop2-tungnn deployment completed!\n" +
+                        "• *User:* ${env.BUILD_USER ?: 'System'}\n" +
+                        "• *Job:* ${env.JOB_NAME}\n" +
+                        "• *Build:* #${env.BUILD_NUMBER}\n" +
+                        "• *Release:* ${releaseDate}\n" +
+                        "${envMessage}"
+            )
+        }
+
+        failure {
+            echo "=== DEPLOY FAILED ==="
+            slackSend(
+                channel: '#lnd-2025-workshop',
+                color: 'danger',
+                message: ":x: *FAILED* - Workshop2-tungnn deployment failed!\n" +
+                        "• *User:* ${env.BUILD_USER ?: 'System'}\n" +
+                        "• *Job:* ${env.JOB_NAME}\n" +
+                        "• *Build:* #${env.BUILD_NUMBER}\n" +
+                        "• *Error:* Check Jenkins console for details"
+            )
+        }
+
+        always {
+            echo "=== CLEANUP ==="
+            cleanWs()
+        }
+    }
 }
