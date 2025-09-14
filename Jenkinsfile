@@ -81,8 +81,8 @@ pipeline {
                         def releaseDir = "${REMOTE_PATH}/${PRIVATE_FOLDER}/deploy/${releaseDate}"
                         echo '*****DEPLOY REMOTE*****'
                         sshagent (credentials: ['WORKSHOP_SSH_KEY']) {
+                            echo "deploy version $(date +%Y%m%d%H%M%S)
                             sh """
-                                echo "deploy version $(date +%Y%m%d%H%M%S)
                                 ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} -p ${REMOTE_PORT} "
                                     mkdir -p ${releaseDir}
                                 "
