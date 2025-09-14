@@ -98,7 +98,7 @@ pipeline {
                                 ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} -p ${REMOTE_PORT} "
                                     cd ${REMOTE_PATH}/${PRIVATE_FOLDER}/deploy
                                     rm -f current
-                                    ln -s ${RELEASE_DATE} current
+                                    ln -s ${releaseDate} current
                                     ls -1t | grep -E '^[0-9]{8}\$' | tail -n +6 | xargs -r rm -rf
                                 "
                             """
