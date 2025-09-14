@@ -72,10 +72,16 @@ pipeline {
                         """
                     }
                     else if (params.DEPLOY_ENV == 'firebase') {
-                        sh """
-                            npm install -g firebase-tools
-                            firebase deploy --project your-firebase-project-id --only hosting
-                        """
+                        echo "*****DEPLOY FIREBASE*****"
+                        withCredentials([file(credentialsId: 'ADC', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                            sh '''
+                                # Set environment variable for Application Default Credentials
+                                export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
+
+                                # Deploy using ADC (no token needed)
+                                firebase deploy --only hosting --project=${PROJECT_NAME}
+                            '''
+                        }
                     }
                     else if (params.DEPLOY_ENV == 'remote') {
                         def releaseDir = "${REMOTE_PATH}/${PRIVATE_FOLDER}/deploy/${releaseDate}"
