@@ -75,10 +75,9 @@ pipeline {
                         """
                     }
                     else if (params.DEPLOY_ENV == 'remote') {
+                        echo '*****DEPLOY LOCAL*****'
                         sh """
-                            ssh remote_user@remote_host 'mkdir -p /usr/share/nginx/html/jenkins/deploy/${BUILD_ID}'
-                            scp -r web-performance-project1-initial/* remote_user@remote_host:/usr/share/nginx/html/jenkins/deploy/${BUILD_ID}/
-                            ssh remote_user@remote_host 'rm -f /usr/share/nginx/html/jenkins/deploy/current && ln -s /usr/share/nginx/html/jenkins/deploy/${BUILD_ID} /usr/share/nginx/html/jenkins/deploy/current'
+
                         """
                     }
                 }
