@@ -83,7 +83,7 @@ pipeline {
                         sshagent (credentials: ['WORKSHOP_SSH_KEY']) {
                             sh """
                                 ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} -p ${REMOTE_PORT}'
-                                    mkdir -p ${releaseDir}
+                                    mkdir -p \${releaseDir}
                                     echo "deploy version $(date +%Y%m%d%H%M%S)"
                                 '
 
