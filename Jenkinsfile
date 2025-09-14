@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS_24.8'
+    }
+
     environment {
         PROJECT_NAME = 'tungnn-workshop2'
         LOCAL_PATH = '/usr/share/nginx/html/jenkins'
