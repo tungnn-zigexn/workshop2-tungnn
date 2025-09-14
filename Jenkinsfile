@@ -83,16 +83,16 @@ pipeline {
                         sshagent (credentials: ['WORKSHOP_SSH_KEY']) {
                             sh """
                                 ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} -p ${REMOTE_PORT} "
-                                    mkdir -p \${releaseDir}
-                                    echo \"deploy version \$(date +%Y%m%d%H%M%S)\"
+                                    mkdir -p ${releaseDir}
+                                    echo "deploy version $(date +%Y%m%d%H%M%S) "
                                 "
 
                                 # Copy các file cần thiết vào thư mục release
-                                scp -o StrictHostKeyChecking=no -P ${REMOTE_PORT} index.html ${REMOTE_USER}@${REMOTE_HOST}:\${releaseDir}/
-                                scp -o StrictHostKeyChecking=no -P ${REMOTE_PORT} 404.html ${REMOTE_USER}@${REMOTE_HOST}:\${releaseDir}/
-                                scp -o StrictHostKeyChecking=no -P ${REMOTE_PORT} -r css ${REMOTE_USER}@${REMOTE_HOST}:\${releaseDir}/
-                                scp -o StrictHostKeyChecking=no -P ${REMOTE_PORT} -r js ${REMOTE_USER}@${REMOTE_HOST}:\${releaseDir}/
-                                scp -o StrictHostKeyChecking=no -P ${REMOTE_PORT} -r images ${REMOTE_USER}@${REMOTE_HOST}:\${releaseDir}/
+                                scp -o StrictHostKeyChecking=no -P ${REMOTE_PORT} index.html ${REMOTE_USER}@${REMOTE_HOST}:${releaseDir}/
+                                scp -o StrictHostKeyChecking=no -P ${REMOTE_PORT} 404.html ${REMOTE_USER}@${REMOTE_HOST}:${releaseDir}/
+                                scp -o StrictHostKeyChecking=no -P ${REMOTE_PORT} -r css ${REMOTE_USER}@${REMOTE_HOST}:${releaseDir}/
+                                scp -o StrictHostKeyChecking=no -P ${REMOTE_PORT} -r js ${REMOTE_USER}@${REMOTE_HOST}:${releaseDir}/
+                                scp -o StrictHostKeyChecking=no -P ${REMOTE_PORT} -r images ${REMOTE_USER}@${REMOTE_HOST}:${releaseDir}/
 
                                 # Cập nhật liên kết 'current' và xóa các bản phát hành cũ hơn
                                 ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} -p ${REMOTE_PORT} "
