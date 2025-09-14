@@ -73,7 +73,7 @@ pipeline {
                     }
                     else if (params.DEPLOY_ENV == 'firebase') {
                         echo "*****DEPLOY FIREBASE*****"
-                        withCredentials([file(credentialsId: 'ADC', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                        withCredentials([file(credentialsId: 'adc-service', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
                             sh '''
                                 # Set environment variable for Application Default Credentials
                                 export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
