@@ -132,7 +132,7 @@ pipeline {
                     channel: '#lnd-2025-workshop',
                     color: 'good',
                     message: ":white_check_mark: *SUCCESS* - Workshop2-tungnn deployment completed!\n" +
-                            "• *User:* ${env.BUILD_USER ?: 'System'}\n" +
+                            "• *User:* Tung Nguyen Ngoc\n" +
                             "• *Job:* ${env.JOB_NAME}\n" +
                             "• *Build:* #${env.BUILD_NUMBER}\n" +
                             "• *Release:* ${releaseDate}\n" +
