@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS_24.8'
-    }
+    // tools {
+    //     nodejs 'NodeJS_24.8'
+    // }
 
     environment {
         PROJECT_NAME = 'tungnn-workshop2'
